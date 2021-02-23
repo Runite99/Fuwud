@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<title>Cibo | Terminal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/main.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+</style>
+<body class="w3-light-grey">
+
+<!-- Navigation Bar -->
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-black w3-card" id="myNavbar">
+      <a href="home.html" class="w3-bar-item w3-button w3-wide">LOGO</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="compliments.html" class="w3-bar-item w3-button">COMPLIMENTS</a>
+        <a href="terminal.html" class="w3-bar-item w3-button"><!--<i class="fa fa-user"></i>--> GOOD FOOD</a>
+        <a href="hosting.html" class="w3-bar-item w3-button"><!--<i class="fa fa-th"></i>--> HOSTING </a>
+        <a href="status.html" class="w3-bar-item w3-button"><!--<i class="fa fa-usd"></i>--> STATUS </a>
+        <a href="questions.html" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> QUESTIONS </a>
+      </div>
+    </div>
+</div>
+
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+  <img class="w3-image" src="images/onepage_restaurant.jpg" alt="London" width="1500" height="700">
+  <div class="w3-display-middle" style="width:65%">
+    <div class="w3-bar w3-black">
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Cibster Login');"><!--<i class="fa fa-plane w3-margin-right"></i>-->Cibster</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Restauranteur Login');"><!--<i class="fa fa-bed w3-margin-right"></i>-->Restauranteur</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Lessor Login');"><!--<i class="fa fa-car w3-margin-right"></i>-->Lessor</button>
+    </div>
+
+    <!-- Tabs -->
+    <div id="Cibster Login" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Sign In</h3>
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">
+          <label>Username or Email</label>
+          <input class="w3-input w3-border" type="text" placeholder="croque@cibo.com">
+        </div>
+
+        <div class="w3-half">
+          <label>Password</label>
+          <input class="w3-input w3-border" type="text" placeholder="Sample Text">
+        </div>
+      </div>
+      <p><a href="cibsterDash.html"><button class="w3-button w3-dark-grey">Sign In</button></a></p>
+    </div>
+
+    <div id="Restauranteur Login" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Sign In</h3>
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">
+          <label>Username or Email</label>
+          <input class="w3-input w3-border" type="text" placeholder="croque@cibo.com">
+        </div>
+
+        <div class="w3-half">
+          <label>Password</label>
+          <input class="w3-input w3-border" type="text" placeholder="Sample Text">
+        </div>
+      </div>
+      <p><a href="restaurantDash.html"><button class="w3-button w3-dark-grey">Sign In</button></a></p>
+    </div>
+
+    <div id="Lessor Login" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Sign In</h3>
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">
+          <label>Username or Email</label>
+          <input class="w3-input w3-border" type="text" placeholder="croque@cibo.com">
+        </div>
+
+        <div class="w3-half">
+          <label>Password</label>
+          <input class="w3-input w3-border" type="text" placeholder="Sample Text">
+        </div>
+      </div>
+      <p><a href="lessorDash.html"><button class="w3-button w3-dark-grey">Sign In</button></a></p>
+    </div>
+
+
+  </div>
+</header>
+
+
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+  <h5>Find Us On</h5>
+  <div class="w3-xlarge w3-padding-16">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+
+// Click on the first tablink on load
+document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>
