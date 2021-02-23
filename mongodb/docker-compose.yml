@@ -3,18 +3,28 @@ version: '3.1'
 
 services:
 
-  mongo:
-    image: mongo
-    restart: always
+  ui:
+    build:
+      context: ./ui
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-  mongo-express:
-    image: mongo-express
-    restart: always
+      - REST_SERVER=http://rest:5000
     ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      - 80:5000
+    volumes:
+      - ./ui/src:/app
+    container_name: webserver
+
+  mysql-db:
+    image: mysql:latest
+    restart: always
+    env_file:
+      ./credentials.env
+    ports:
+      - 3306:3306                     # external port : internal mysql port
+    volumes:
+      - ./persist_db:/var/lib/mysql   # persist when container is stopped!
+    container_name: dbserver
+
+volumes:
+  persist_db:
+    
