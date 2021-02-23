@@ -17,14 +17,17 @@ services:
   mysql-db:
     image: mysql:latest
     restart: always
-    env_file:
-      ./credentials.env
+    environment:
+      MYSQL_ROOT_PASSWORD: adminator
+      MYSQL_DATABASE: fuwud
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminator
     ports:
       - 3306:3306                     # external port : internal mysql port
     volumes:
-      - ./persist_db:/var/lib/mysql   # persist when container is stopped!
+      - db_data:/var/lib/mysql  # persist when container is stopped!
     container_name: dbserver
 
 volumes:
-  persist_db:
+  db_data: {}
     
