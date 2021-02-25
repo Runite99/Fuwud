@@ -1,16 +1,18 @@
 from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
 from pyramid.renderers import render_to_response
+from datetime import datetime
 #from pyramid.response import FileResponse
 
 import json
 import requests
 import mysql.connector as mysql
 import os
+import smtplib, ssl
 REST_SERVER = os.environ['REST_SERVER']
 
 db_host = "mysql-db"
-db_name = '140b_rest_db'
+db_name = 'fuwud'
 db_user = 'admin'
 db_pass = 'adminator'
 
@@ -36,6 +38,59 @@ def get_questions(req):
 # --- Internal Routes
 def get_directory(req):
     return render_to_response('directory.html', {}, request=req)
+
+# --- Compliments Page Send to Backend + sends email with message
+def send_compliment(receiver_email, name):
+    port = 587
+    password = 'Y#<&^E/&k]xQ~>Tz(k@o'
+    smtp_server = "smtp.gmail.com"
+    sender_email = 'cibo.user@gmail.com'
+
+    message = f"""\
+Subject: You've Been Complimented!
+
+
+Howdy there {name}, my name is Doug Dimmadome owner of the Dimmsdale Dimmadome. 
+Thank you for locating my long lost son Dale Dimmadome, heir to the Dimmsdale Dimmadome fortune. 
+If there's anything I can do to repay you for your kindness, all you need to do is ask!"""
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.starttls(context=context)
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
+def post_compliments(req):
+    compliments = {
+        'Name': req.params['Name'],
+        'City': req.params['City'],
+        'Email': req.params['Email']
+    }
+    print(compliments)
+    print("Testing out dictionary access: Compliments\n")
+    compliments_data = list(compliments.values())
+    comp_name = compliments_data[0]
+    comp_city = compliments_data[1]
+    comp_email = compliments_data[2]
+    now = datetime.now()
+    comp_time = now.strftime('%Y-%m-%d %H:%M:%S')
+
+    db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
+    cursor = db.cursor()
+
+    check_sql = f"SELECT * from Compliments where email = '{comp_time}'"
+    
+    sql = f"INSERT INTO Compliments (name, city, email, created_at, sent) VALUES ('{comp_name}', '{comp_city}', '{comp_email}', '{comp_time}', 0)"
+    print(sql)
+    cursor.execute(sql)
+    db.commit()
+    print(cursor.rowcount, "record inserted.")
+    
+    db.close()
+
+    send_compliment(comp_email, comp_name)
+    return render_to_response('compliments.html',{}, request=req)
 
 # #--- this is called to compare credentials to the value
 # def is_valid_user(req):
@@ -156,7 +211,8 @@ if __name__ == '__main__':
 
         # --- Navbar Routes
         config.add_route('compliments', '/compliments')
-        config.add_view(get_compliments, route_name='compliments')
+        config.add_view(get_compliments, route_name='compliments', request_method='GET')
+        config.add_view(post_compliments, route_name='compliments', request_method='POST')
         
         config.add_route('terminal', '/terminal')
         config.add_view(get_terminal, route_name='terminal')
