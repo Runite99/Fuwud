@@ -67,11 +67,32 @@ body, html {
   <div style="margin-top:48px">
     <br>
     <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <!--Referrer's Name-->
+      <div class="w3-half">
+        <p><input class="w3-input w3-border" type="text" placeholder="Your First Name" required name="Your First Name"></p>
+      </div>
+      <div class="w3-half">
+        <p><input class="w3-input w3-border" type="text" placeholder="Your Last Name" required name="Your Last Name"></p>
+      </div>
+      <!--Chef's Name-->
+      <div class="w3-half">
+        <p><input class="w3-input w3-border" type="text" placeholder="Chef's First Name" required name="Chef's First Name"></p>
+      </div>
+      <div class="w3-half">
+        <p><input class="w3-input w3-border" type="text" placeholder="Chef's Last Name" required name="Chef's Last Name"></p>
+      </div>
+      <!--City-->
       <p><input class="w3-input w3-border" type="text" placeholder="City" required name="City"></p>
+      <!--Email-->
       <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+      <!--Subject-->
       <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+      <!--Message-->
       <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <!--Anonymous-->
+      <p><input class="w3-input w3-border" type="checkbox" id="anon" name="anon" value=1> <label for="anon">Check to send an anonymous compliment</label></p>
+      <!--Newsletter-->
+      <p><input class="w3-input w3-border" type="checkbox" id="news" name="news" value=1> <label for="news">Check to keep up with the Cibo newsletter</label></p>
       
       <p>
         <button class="w3-button w3-black" type="submit">
