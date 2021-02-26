@@ -8,7 +8,13 @@ import json
 import requests
 import mysql.connector as mysql
 import os
+
+# Email Imports
 import smtplib, ssl
+import codecs
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 REST_SERVER = os.environ['REST_SERVER']
 
 db_host = "mysql-db"
@@ -41,12 +47,18 @@ def get_directory(req):
 
 # --- Compliments Page Send to Backend + sends email with message
 def send_compliment(receiver_email, name):
-    port = 587
-    password = 'Y#<&^E/&k]xQ~>Tz(k@o'
+    password = FILLIN
     smtp_server = "smtp.gmail.com"
     sender_email = 'cibo.user@gmail.com'
 
-    message = f"""\
+    message = MIMEMultipart("alternative")
+    message['Subject'] = 'multipart test'
+    message['From'] = sender_email
+    message['To'] = receiver_email
+
+    port = 587
+
+    text = f"""\
 Subject: You've Been Complimented!
 
 
@@ -54,12 +66,33 @@ Howdy there {name}, my name is Doug Dimmadome owner of the Dimmsdale Dimmadome.
 Thank you for locating my long lost son Dale Dimmadome, heir to the Dimmsdale Dimmadome fortune. 
 If there's anything I can do to repay you for your kindness, all you need to do is ask!"""
 
+    html = """\
+    <html>
+    <body>
+        <p>Hi,<br>
+        How are you?<br>
+        <a href="http://www.realpython.com">Real Python</a> 
+        has many great tutorials.
+        </p>
+    </body>
+    </html>
+    """
+
+    part1 = MIMEText(text, 'plain')
+    f = codecs.open('send_email.html', 'r', 'utf-8')
+    part2 = MIMEText(f.read(), 'html')
+
+    message.attach(part1)
+    message.attach(part2)
+
     context = ssl.create_default_context()
 
     with smtplib.SMTP(smtp_server, port) as server:
         server.starttls(context=context)
         server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        server.sendmail(
+            sender_email, receiver_email, message.as_string()
+        )
 
 def post_compliments(req):
     compliments = {
