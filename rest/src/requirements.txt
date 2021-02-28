@@ -1,0 +1,2 @@
+pyramid==1.10
+mysql-connector-python
