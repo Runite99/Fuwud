@@ -18,47 +18,48 @@ cursor = db.cursor()
 # Create a Foodies table (wrapping it in a try-except is good practice)
 try:
   cursor.execute("""
-    CREATE TABLE Printers (
-      id integer  AUTO_INCREMENT PRIMARY KEY,
-      first_name  VARCHAR(30) NOT NULL,
-      last_name   VARCHAR(30) NOT NULL,
+    CREATE TABLE Compliments (
+      id          integer  AUTO_INCREMENT PRIMARY KEY,
+      name        VARCHAR(60) NOT NULL,
+      city        VARCHAR(60) NOT NULL, 
       email       VARCHAR(50) NOT NULL,
-      created_at  TIMESTAMP
+      created_at  DATETIME,
+      sent        BOOLEAN
     );
   """)
 except:
   print("Table already exists. Not recreating it.")
 
-# Create a Clients table (wrapping it in a try-except is good practice)
-try:
-  cursor.execute("""
-    CREATE TABLE Customers (
-      id integer  AUTO_INCREMENT PRIMARY KEY,
-      first_name  VARCHAR(30) NOT NULL,
-      last_name   VARCHAR(30) NOT NULL,
-      email       VARCHAR(50) NOT NULL,
-      created_at  TIMESTAMP
-    );
-  """)
-except:
-  print("Table already exists. Not recreating it.")
+# # Create a Clients table (wrapping it in a try-except is good practice)
+# try:
+#   cursor.execute("""
+#     CREATE TABLE Customers (
+#       id integer  AUTO_INCREMENT PRIMARY KEY,
+#       first_name  VARCHAR(30) NOT NULL,
+#       last_name   VARCHAR(30) NOT NULL,
+#       email       VARCHAR(50) NOT NULL,
+#       created_at  TIMESTAMP
+#     );
+#   """)
+# except:
+#   print("Table already exists. Not recreating it.")
 
-# Create a Restaurants table (wrapping it in a try-except is good practice)
-try:
-  cursor.execute("""
-    CREATE TABLE Customers (
-      id integer  AUTO_INCREMENT PRIMARY KEY,
-      first_name  VARCHAR(30) NOT NULL,
-      last_name   VARCHAR(30) NOT NULL,
-      email       VARCHAR(50) NOT NULL,
-      created_at  TIMESTAMP
-    );
-  """)
-except:
-  print("Table already exists. Not recreating it.")
+# # Create a Restaurants table (wrapping it in a try-except is good practice)
+# try:
+#   cursor.execute("""
+#     CREATE TABLE Customers (
+#       id integer  AUTO_INCREMENT PRIMARY KEY,
+#       first_name  VARCHAR(30) NOT NULL,
+#       last_name   VARCHAR(30) NOT NULL,
+#       email       VARCHAR(50) NOT NULL,
+#       created_at  TIMESTAMP
+#     );
+#   """)
+# except:
+#   print("Table already exists. Not recreating it.")
 
 # Selecting Records
-cursor.execute("select * from Customers;")
+cursor.execute("select * from Compliments;")
 print('---------- DATABASE INITIALIZED ----------')
 [print(x) for x in cursor]
 
