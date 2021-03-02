@@ -7,4 +7,5 @@ RUN pip install -r /tmp/requirements.txt
 WORKDIR /app
 
 EXPOSE 5000
+
 CMD python pyr_ui.py
