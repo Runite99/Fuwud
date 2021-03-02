@@ -6,7 +6,6 @@ from scripts import send_compliment, compliments_to_db
 
 import json
 import requests
-import mysql.connector as mysql
 import os
 
 @view_config(route_name='main')
