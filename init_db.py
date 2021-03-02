@@ -15,7 +15,7 @@ db_host = 'localhost' # different than inside the container and assumes default 
 db = mysql.connect(user=db_user, password=db_pass, host=db_host, database=db_name)
 cursor = db.cursor()
 
-# Create a Foodies table (wrapping it in a try-except is good practice)
+# Create a Compliments table (wrapping it in a try-except is good practice)
 try:
   cursor.execute("""
     CREATE TABLE Compliments (
@@ -23,12 +23,27 @@ try:
       name        VARCHAR(60) NOT NULL,
       city        VARCHAR(60) NOT NULL, 
       email       VARCHAR(50) NOT NULL,
-      created_at  DATETIME,
-      sent        BOOLEAN
+      created_at  DATETIME
     );
   """)
 except:
-  print("Table already exists. Not recreating it.")
+  print("Compliments Table already exists. Not recreating it.")
+
+
+# Create a mailing_list table
+try:
+  cursor.execute("""
+    CREATE TABLE mailing_list (
+      id  integer AUTO_INCREMENT PRIMARY KEY,
+      first_name     VARCHAR(60) NOT NULL,
+      last_name      VARCHAR(60) NOT NULL,
+      mobile         VARCHAR(15) NULL DEFAULT NULL,
+      email          VARCHAR(60) NOT NULL,
+      created_at     DATETIME
+    );
+  """)
+except:
+  print("mailing_list Table already exists. Not recreating it.")
 
 # # Create a Clients table (wrapping it in a try-except is good practice)
 # try:
