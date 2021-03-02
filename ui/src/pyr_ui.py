@@ -8,6 +8,8 @@ import json
 import requests
 import mysql.connector as mysql
 import os
+from dotenv import load_dotenv
+load_dotenv('credentials.env')
 
 # Email Imports
 import smtplib, ssl
@@ -18,9 +20,9 @@ from email.mime.multipart import MIMEMultipart
 REST_SERVER = os.environ['REST_SERVER']
 
 db_host = "mysql-db"
-db_name = 'fuwud'
-db_user = 'admin'
-db_pass = 'adminator'
+db_name = os.environ['MYSQL_DATABASE']
+db_user = os.environ['MYSQL_USER']
+db_pass = os.environ['MYSQL_PASSWORD']
 
 def main_page(req):
   return render_to_response('home.html', {}, request=req)
@@ -47,9 +49,9 @@ def get_directory(req):
 
 # --- Compliments Page Send to Backend + sends email with message
 def send_compliment(receiver_email, name):
-    password = FILLIN
     smtp_server = "smtp.gmail.com"
-    sender_email = 'cibo.user@gmail.com'
+    password = os.environ['EMAIL_PASSWORD']
+    sender_email = os.environ['EMAIL']
 
     message = MIMEMultipart("alternative")
     message['Subject'] = 'You received a compliment!'
@@ -96,7 +98,7 @@ def post_compliments(req):
 
     check_sql = f"SELECT * from Compliments where email = '{comp_time}'"
     
-    sql = f"INSERT INTO Compliments (name, city, email, created_at, sent) VALUES ('{comp_name}', '{comp_city}', '{comp_email}', '{comp_time}', 0)"
+    sql = f"INSERT INTO Compliments (name, city, email, created_at) VALUES ('{comp_name}', '{comp_city}', '{comp_email}', '{comp_time}')"
     print(sql)
     cursor.execute(sql)
     db.commit()
