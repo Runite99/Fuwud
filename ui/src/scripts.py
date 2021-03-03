@@ -47,21 +47,16 @@ def send_compliment(receiver_email, name):
         )
 
 def compliments_to_db(compliments_data):
-    comp_name = compliments_data[0]
-    comp_city = compliments_data[1]
-    comp_email = compliments_data[2]
     now = datetime.now()
     comp_time = now.strftime('%Y-%m-%d %H:%M:%S')
-
     db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
     cursor = db.cursor()
-
-    check_sql = f"SELECT * from Compliments where email = '{comp_time}'"
-    
-    sql = f"INSERT INTO Compliments (name, city, email, created_at) VALUES ('{comp_name}', '{comp_city}', '{comp_email}', '{comp_time}')"
+    comp_data_sql_query = ', '.join("'" + str(x).replace('/', '_') + "'" for x in compliments_data.values())
+    print(comp_data_sql_query)
+    sql = f"""INSERT INTO Compliments (first_name, last_name, chef_first_name, chef_last_name, city, email, anonymous, mailing_list, created_at) 
+              VALUES ({comp_data_sql_query}, '{comp_time}')"""
     print(sql)
     cursor.execute(sql)
     db.commit()
     print(cursor.rowcount, "record inserted.")
-    
     db.close()
