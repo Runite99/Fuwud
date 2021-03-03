@@ -19,14 +19,20 @@ def get_compliments(req):
 
 @view_config(route_name='compliments', request_method='POST')
 def post_compliments(req):
+    print(req.params)
     compliments = {
-        'Name': req.params['Name'],
-        'City': req.params['City'],
-        'Email': req.params['Email']
+        'first_name': req.params['first_name'],
+        'last_name': req.params['last_name'],
+        'chef_first_name': req.params['chef_first_name'],
+        'chef_last_name': req.params['chef_last_name'],
+        'city': req.params['city'],
+        'email': req.params['email'],
+        'anon': req.params['anon'],
+        'news': req.params['news'],
     }
-    compliments_data = list(compliments.values())
-    compliments_to_db(compliments_data)
-    send_compliment(req.params['Email'], req.params['Name'])
+    print(compliments)
+    compliments_to_db(compliments)
+    send_compliment(compliments['email'], compliments['chef_first_name'])
     return render_to_response('html_files/compliments.html',{}, request=req)
 
 @view_config(route_name='terminal')

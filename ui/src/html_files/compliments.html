@@ -66,33 +66,31 @@ body, html {
   <p class="w3-center w3-large">Send them a referral link and we'll cover a month of Cibo meals for a new restaurant</p>
   <div style="margin-top:48px">
     <br>
-    <form action="/action_page.php" target="_blank">
+    <form method='POST' action="/compliments" target="_blank">
       <!--Referrer's Name-->
       <div class="w3-half">
-        <p><input class="w3-input w3-border" type="text" placeholder="Your First Name" required name="Your First Name"></p>
+        <p><input class="w3-input w3-border" type="text" id='first_name' placeholder="Your First Name" required name="first_name"></p>
       </div>
       <div class="w3-half">
-        <p><input class="w3-input w3-border" type="text" placeholder="Your Last Name" required name="Your Last Name"></p>
+        <p><input class="w3-input w3-border" type="text" id='last_name' placeholder="Your Last Name" required name="last_name"></p>
       </div>
       <!--Chef's Name-->
       <div class="w3-half">
-        <p><input class="w3-input w3-border" type="text" placeholder="Chef's First Name" required name="Chef's First Name"></p>
+        <p><input class="w3-input w3-border" type="text" id='chef_first_name' placeholder="Chef's First Name" required name="chef_first_name"></p>
       </div>
       <div class="w3-half">
-        <p><input class="w3-input w3-border" type="text" placeholder="Chef's Last Name" required name="Chef's Last Name"></p>
+        <p><input class="w3-input w3-border" type="text" id='chef_last_name' placeholder="Chef's Last Name" required name="chef_last_name"></p>
       </div>
       <!--City-->
-      <p><input class="w3-input w3-border" type="text" placeholder="City" required name="City"></p>
+      <p><input class="w3-input w3-border" type="text" id='city' placeholder="Chef's City" required name="city"></p>
       <!--Email-->
-      <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-      <!--Subject-->
-      <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-      <!--Message-->
-      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <p><input class="w3-input w3-border" type="text" id='email' placeholder="Chef's Email" required name="email"></p>
       <!--Anonymous-->
-      <p><input class="w3-input w3-border" type="checkbox" id="anon" name="anon" value=1> <label for="anon">Check to send an anonymous compliment</label></p>
+      <p> <input type="hidden" id="anon_hidden" name="anon" value=0>
+          <input class="w3-input w3-border" type="checkbox" id="anon" name="anon" value=1> <label for="anon">Check to send an anonymous compliment</label></p>
       <!--Newsletter-->
-      <p><input class="w3-input w3-border" type="checkbox" id="news" name="news" value=1> <label for="news">Check to keep up with the Cibo newsletter</label></p>
+      <p> <input type="hidden" id="news_hidden" name="news" value=0>
+          <input class="w3-input w3-border" type="checkbox" id="news" name="news" value=1> <label for="news">Check to keep up with the Cibo newsletter</label></p>
       
       <p>
         <button class="w3-button w3-black" type="submit">

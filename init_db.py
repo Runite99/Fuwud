@@ -20,12 +20,18 @@ try:
   cursor.execute("""
     CREATE TABLE Compliments (
       id          integer  AUTO_INCREMENT PRIMARY KEY,
-      name        VARCHAR(60) NOT NULL,
-      city        VARCHAR(60) NOT NULL, 
-      email       VARCHAR(50) NOT NULL,
-      created_at  DATETIME
+      first_name        VARCHAR(60) NULL DEFAULT NULL,
+      last_name         VARCHAR(60) NULL DEFAULT NULL,
+      chef_first_name   VARCHAR(60) NOT NULL,
+      chef_last_name    VARCHAR(60) NOT NULL,
+      city              VARCHAR(60) NOT NULL, 
+      email             VARCHAR(60) NOT NULL,
+      anonymous         BOOLEAN,
+      mailing_list      BOOLEAN,
+      created_at        DATETIME
     );
   """)
+  print("Creating Compliments table...")
 except:
   print("Compliments Table already exists. Not recreating it.")
 
@@ -42,6 +48,7 @@ try:
       created_at     DATETIME
     );
   """)
+  print("Creating mailing_list table...")
 except:
   print("mailing_list Table already exists. Not recreating it.")
 
