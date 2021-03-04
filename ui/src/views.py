@@ -55,3 +55,9 @@ def get_questions(req):
 @view_config(route_name='directory')
 def get_directory(req):
     return render_to_response('html_files/directory.html', {}, request=req)
+
+
+# --- Newsletter Page
+@view_config(route_name='newsletter_signup', request_method='GET')
+def get_newsletter_signup(req):
+    return render_to_response('html_files/newsletter_signup.html', {}, request=req)
