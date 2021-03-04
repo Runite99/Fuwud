@@ -41,8 +41,8 @@ try:
   cursor.execute("""
     CREATE TABLE mailing_list (
       id  integer AUTO_INCREMENT PRIMARY KEY,
-      first_name     VARCHAR(60) NOT NULL,
-      last_name      VARCHAR(60) NOT NULL,
+      first_name     VARCHAR(60) NULL DEFAULT NULL,
+      last_name      VARCHAR(60) NULL DEFAULT NULL,
       mobile         VARCHAR(15) NULL DEFAULT NULL,
       email          VARCHAR(60) NOT NULL,
       created_at     DATETIME
