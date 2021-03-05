@@ -60,3 +60,25 @@ def compliments_to_db(compliments_data):
     db.commit()
     print(cursor.rowcount, "record inserted.")
     db.close()
+
+def newsletter_to_db(newsletter_signup):
+    now = datetime.now()
+    comp_time = now.strftime('%Y-%m-%d %H:%M:%S')
+    db = mysql.connect(host=db_host, database=db_name, user=db_user, passwd=db_pass)
+    cursor = db.cursor()
+    cursor.execute("SELECT DISTINCT email FROM mailing_list")
+    email_list = [item[0] for item in cursor.fetchall()]
+    if(newsletter_signup['email'] in email_list):
+        print("Email already exists")
+        return False
+    else:  
+        newsletter_signup_sql_query = ', '.join("'" + str(x).replace('/', '_') + "'" for x in newsletter_signup.values())
+        print(newsletter_signup_sql_query)
+        sql = f"""INSERT INTO mailing_list (first_name, last_name, mobile, email, created_at) 
+                VALUES ({newsletter_signup_sql_query}, '{comp_time}')"""
+        print(sql)
+        cursor.execute(sql)
+        db.commit()
+        print(cursor.rowcount, "record inserted.")
+        db.close()
+        return True

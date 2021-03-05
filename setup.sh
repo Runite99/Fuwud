@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "MYSQL_HOST=mysql-db
+MYSQL_ROOT_PASSWORD=adminator
 MYSQL_DATABASE=fuwud
 MYSQL_USER=admin
 MYSQL_PASSWORD=adminator" > credentials.env

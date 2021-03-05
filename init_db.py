@@ -82,6 +82,7 @@ except:
 
 # Selecting Records
 cursor.execute("select * from Compliments;")
+
 print('---------- DATABASE INITIALIZED ----------')
 [print(x) for x in cursor]
 
